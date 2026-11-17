@@ -1,0 +1,587 @@
+<!DOCTYPE html>
+<html lang="pl" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hubert Gnyp | Inżynier Elektroniki | Portfolio</title>
+    
+    <!-- Favicon (Microchip SVG) -->
+    <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%2310b981' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'><rect x='4' y='4' width='16' height='16' rx='2'/><rect x='9' y='9' width='6' height='6'/><line x1='9' y1='1' x2='9' y2='4'/><line x1='15' y1='1' x2='15' y2='4'/><line x1='9' y1='20' x2='9' y2='23'/><line x1='15' y1='20' x2='15' y2='23'/><line x1='20' y1='9' x2='23' y2='9'/><line x1='20' y1='14' x2='23' y2='14'/><line x1='1' y1='9' x2='4' y2='9'/><line x1='1' y1='14' x2='4' y2='14'/></svg>">
+
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@300;400;500;600&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    
+    <!-- Feather Icons -->
+    <script src="https://unpkg.com/feather-icons"></script>
+
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                        mono: ['Fira Code', 'monospace'],
+                    },
+                    colors: {
+                        gray: {
+                            900: '#111827',
+                            950: '#030712',
+                        },
+                        accent: {
+                            DEFAULT: '#10b981', // Emerald green
+                            hover: '#059669',
+                            glow: 'rgba(16, 185, 129, 0.4)'
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+
+    <style>
+        /* Custom Scrollbar */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #030712; 
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #374151; 
+            border-radius: 4px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: #10b981; 
+        }
+        
+        body {
+            background-color: #030712;
+            color: #d1d5db;
+        }
+
+        .tech-tag {
+            @apply font-mono text-xs px-2.5 py-1 bg-gray-800 text-accent rounded border border-gray-700/80 inline-flex items-center gap-1;
+        }
+
+        .section-heading {
+            @apply text-3xl md:text-4xl font-bold text-white mb-8 flex items-center gap-4;
+        }
+        
+        .section-heading::before {
+            content: '~/';
+            @apply text-accent font-mono;
+        }
+
+        /* Glitch/Glow effect on hover for cards */
+        .project-card {
+            transition: all 0.3s ease;
+        }
+        .project-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 30px -10px theme('colors.accent.glow');
+            border-color: theme('colors.accent.DEFAULT');
+        }
+
+        .photo-frame {
+            box-shadow: 0 0 35px -10px rgba(16, 185, 129, 0.35);
+        }
+    </style>
+</head>
+<body class="antialiased selection:bg-accent selection:text-gray-950 font-sans leading-relaxed flex flex-col min-h-screen">
+
+    <!-- Navigation -->
+    <nav class="fixed w-full z-50 bg-gray-950/85 backdrop-blur-md border-b border-gray-800 transition-all duration-300">
+        <div class="max-w-6xl mx-auto px-6 py-4 flex justify-between items-center">
+            <a href="#home" class="font-mono font-bold text-xl text-white tracking-tighter">
+                <span class="text-accent">&lt;</span>Hubert_Gnyp<span class="text-accent">/&gt;</span>
+            </a>
+            <div class="hidden md:flex space-x-7 text-sm font-mono items-center">
+                <a href="#o-mnie" class="hover:text-accent transition-colors">./o-mnie</a>
+                <a href="#doswiadczenie" class="hover:text-accent transition-colors">./doświadczenie</a>
+                <a href="#edukacja" class="hover:text-accent transition-colors">./edukacja</a>
+                <a href="#projekty" class="hover:text-accent transition-colors">./projekty</a>
+                <a href="#kontakt" class="hover:text-accent transition-colors">./kontakt</a>
+                
+                <div class="flex items-center gap-3 pl-3 border-l border-gray-800">
+                    <a href="https://github.com/hugo2080" target="_blank" rel="noopener noreferrer" class="text-gray-400 hover:text-accent transition-colors" title="GitHub">
+                        <i data-feather="github" class="w-4 h-4"></i>
+                    </a>
+                    <a href="https://www.linkedin.com/in/hubert-gnyp-939983310/" target="_blank" rel="noopener noreferrer" class="text-gray-400 hover:text-accent transition-colors" title="LinkedIn">
+                        <i data-feather="linkedin" class="w-4 h-4"></i>
+                    </a>
+                    <a href="Hubert_Gnyp_CV.pdf" download="Hubert_Gnyp_CV.pdf" class="px-2.5 py-1 text-xs border border-accent/60 text-accent rounded hover:bg-accent hover:text-gray-950 transition-colors flex items-center gap-1 font-mono" title="Pobierz CV w formacie PDF">
+                        <i data-feather="file-text" class="w-3.5 h-3.5"></i>
+                        <span>CV.pdf</span>
+                    </a>
+                </div>
+            </div>
+            <!-- Mobile Menu Button -->
+            <button id="mobile-menu-btn" class="md:hidden text-gray-300 hover:text-accent p-1 focus:outline-none" aria-label="Menu nawigacji">
+                <i data-feather="menu"></i>
+            </button>
+        </div>
+        <!-- Mobile Dropdown -->
+        <div id="mobile-menu" class="hidden md:hidden bg-gray-950/95 border-b border-gray-800 px-6 py-4 space-y-4 font-mono text-sm">
+            <a href="#o-mnie" class="block hover:text-accent transition-colors mobile-link">./o-mnie</a>
+            <a href="#doswiadczenie" class="block hover:text-accent transition-colors mobile-link">./doświadczenie</a>
+            <a href="#edukacja" class="block hover:text-accent transition-colors mobile-link">./edukacja</a>
+            <a href="#projekty" class="block hover:text-accent transition-colors mobile-link">./projekty</a>
+            <a href="#kontakt" class="block hover:text-accent transition-colors mobile-link">./kontakt</a>
+            <div class="pt-3 border-t border-gray-800 flex flex-wrap gap-4 items-center">
+                <a href="https://github.com/hugo2080" target="_blank" rel="noopener noreferrer" class="text-gray-400 hover:text-accent flex items-center gap-1.5">
+                    <i data-feather="github" class="w-4 h-4"></i> GitHub
+                </a>
+                <a href="https://www.linkedin.com/in/hubert-gnyp-939983310/" target="_blank" rel="noopener noreferrer" class="text-gray-400 hover:text-accent flex items-center gap-1.5">
+                    <i data-feather="linkedin" class="w-4 h-4"></i> LinkedIn
+                </a>
+                <a href="Hubert_Gnyp_CV.pdf" download="Hubert_Gnyp_CV.pdf" class="text-accent hover:underline flex items-center gap-1.5">
+                    <i data-feather="download" class="w-4 h-4"></i> Pobierz CV
+                </a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Main Content -->
+    <main class="flex-grow">
+        
+        <!-- Hero Section -->
+        <section id="home" class="min-h-screen flex items-center justify-center pt-24 pb-16 px-6">
+            <div class="max-w-6xl mx-auto w-full flex flex-col-reverse md:flex-row items-center justify-between gap-12 lg:gap-16">
+                
+                <!-- Left: Text content -->
+                <div class="flex-1 text-left">
+                    <div class="inline-flex items-center gap-2 px-3 py-1 bg-accent/10 border border-accent/30 rounded-full font-mono text-xs text-accent mb-6">
+                        <span class="w-2 h-2 rounded-full bg-accent animate-pulse"></span>
+                        <span>Politechnika Łódzka &bull; 5. rok studiów</span>
+                    </div>
+
+                    <h1 class="text-4xl sm:text-5xl lg:text-6xl font-bold text-white mb-4 tracking-tight leading-tight">
+                        Cześć, jestem <br>
+                        <span class="text-transparent bg-clip-text bg-gradient-to-r from-accent via-emerald-400 to-teal-300">Hubert Gnyp</span>.
+                    </h1>
+
+                    <h2 class="text-xl md:text-2xl font-mono text-gray-300 mb-6 border-l-2 border-accent pl-4">
+                        Inżynier Elektroniki | Systemy Wbudowane &amp; Hardware
+                    </h2>
+
+                    <p class="max-w-2xl text-base md:text-lg text-gray-400 mb-8 leading-relaxed">
+                        Moją pasją jest elektronika, którą rozwijam na studiach magisterskich na Politechnice Łódzkiej. 
+                        Specjalizuję się w systemach wbudowanych, układach pozyskiwania energii (<span class="text-gray-200 font-medium">Energy Harvesting</span>) oraz architekturze niskopoziomowej mikrokontrolerów.
+                    </p>
+
+                    <div class="flex flex-wrap gap-3.5">
+                        <a href="#projekty" class="px-5 py-3 bg-accent text-gray-950 font-mono font-semibold rounded hover:bg-accent-hover transition-colors flex items-center gap-2">
+                            <i data-feather="terminal" class="w-4 h-4"></i>
+                            Sprawdź_projekty
+                        </a>
+                        <a href="Hubert_Gnyp_CV.pdf" download="Hubert_Gnyp_CV.pdf" class="px-5 py-3 border border-accent text-accent font-mono font-semibold rounded hover:bg-accent hover:text-gray-950 transition-colors flex items-center gap-2 group">
+                            <i data-feather="download" class="w-4 h-4"></i>
+                            Pobierz_CV (PDF)
+                        </a>
+                        <a href="https://github.com/hugo2080" target="_blank" rel="noopener noreferrer" class="px-4 py-3 border border-gray-700 hover:border-accent text-white font-mono rounded transition-colors flex items-center gap-2 group">
+                            <i data-feather="github" class="w-4 h-4 group-hover:text-accent transition-colors"></i>
+                            GitHub
+                        </a>
+                        <a href="https://www.linkedin.com/in/hubert-gnyp-939983310/" target="_blank" rel="noopener noreferrer" class="px-4 py-3 border border-gray-700 hover:border-accent text-white font-mono rounded transition-colors flex items-center gap-2 group">
+                            <i data-feather="linkedin" class="w-4 h-4 group-hover:text-accent transition-colors"></i>
+                            LinkedIn
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Right: Styled Portrait -->
+                <div class="flex-shrink-0 relative">
+                    <div class="relative w-56 h-64 sm:w-64 sm:h-72 lg:w-72 lg:h-80 rounded-2xl overflow-hidden border-2 border-accent/50 photo-frame bg-gray-900 group">
+                        <img src="profile.jpg" alt="Hubert Gnyp - Inżynier Elektroniki" class="w-full h-full object-cover object-top filter grayscale contrast-105 group-hover:grayscale-0 transition-all duration-500">
+                        <div class="absolute inset-0 bg-gradient-to-t from-gray-950 via-transparent to-transparent opacity-60"></div>
+                    </div>
+                    <!-- Decorative back-glow -->
+                    <div class="absolute -bottom-4 -right-4 w-full h-full rounded-2xl border border-accent/20 -z-10 hidden sm:block"></div>
+                </div>
+
+            </div>
+        </section>
+
+        <!-- O mnie Section -->
+        <section id="o-mnie" class="py-24 px-6 bg-gray-900 border-y border-gray-800">
+            <div class="max-w-5xl mx-auto">
+                <h2 class="section-heading">O mnie</h2>
+                
+                <div class="grid md:grid-cols-2 gap-12 items-center">
+                    <div class="space-y-4 text-base md:text-lg">
+                        <p>
+                            Obecnie studiuję na studiach magisterskich na kierunku <span class="text-accent font-medium">elektronika i telekomunikacja</span> na Politechnice Łódzkiej i wykonuję prace badawczo-rozwojowe na temat: 
+                            <span class="text-accent font-medium">„Badanie porównawcze wydajności obliczeniowej wybranych algorytmów kryptograficznych w systemie wbudowanym”</span>.
+                        </p>
+                        <p>
+                            Tytuł inżyniera zdobyłem, realizując pracę pt. <span class="text-accent font-medium">„Moduł zasilania czujnika BLE mesh pozyskujący energię słoneczną”</span> – skupiony na technologiach <i>energy harvestingu</i>, efektywnym zarządzaniu magazynami energii oraz łączności bezprzewodowej BLE.
+                        </p>
+                        <p>
+                            Posiadam również tytuł <span class="text-white font-medium">Technika elektronika</span> zdobyty w Zespole Szkół Elektryczno-Elektronicznych w Radomsku. W wolnym czasie pracuję także jako <b>korepetytor</b>, co uczy mnie precyzyjnego przekazywania trudnych zagadnień technicznych.
+                        </p>
+                        <p class="text-sm text-gray-400 font-mono pt-2 border-t border-gray-800">
+                            Prywatnie: pasjonat Formuły 1 oraz uniwersum Gwiezdnych Wojen.
+                        </p>
+                    </div>
+                    
+                    <!-- Terminal Window effect -->
+                    <div class="bg-gray-950 rounded-lg border border-gray-700 overflow-hidden shadow-xl">
+                        <div class="bg-gray-800 px-4 py-2 flex items-center justify-between border-b border-gray-700">
+                            <div class="flex items-center gap-2">
+                                <div class="w-3 h-3 rounded-full bg-red-500"></div>
+                                <div class="w-3 h-3 rounded-full bg-yellow-500"></div>
+                                <div class="w-3 h-3 rounded-full bg-green-500"></div>
+                                <span class="font-mono text-xs text-gray-400 ml-2">hubert@lab:~$</span>
+                            </div>
+                            <span class="font-mono text-[11px] text-gray-500">skills.sh</span>
+                        </div>
+                        <div class="p-6 font-mono text-sm leading-loose">
+                            <div class="flex"><span class="text-accent mr-2">~</span><span><span class="text-blue-400">echo</span> $ARCH_AND_MCUS</span></div>
+                            <div class="text-gray-400 mb-2">&gt; STM32, BLE Mesh, Energy Harvesting</div>
+                            
+                            <div class="flex"><span class="text-accent mr-2">~</span><span><span class="text-blue-400">echo</span> $LANGUAGES</span></div>
+                            <div class="text-gray-400 mb-2">&gt; C, C++, Python, Bash</div>
+                            
+                            <div class="flex"><span class="text-accent mr-2">~</span><span><span class="text-blue-400">echo</span> $LAB_AND_TOOLS</span></div>
+                            <div class="text-gray-400 mb-2">&gt; KiCad/Altium Designer, lutowanie ręczne SMD/THT, VS Code, CubeIDE</div>
+                            
+                            <div class="flex"><span class="text-accent mr-2">~</span><span><span class="text-blue-400">echo</span> $LANGUAGES_HUMAN</span></div>
+                            <div class="text-gray-400 mb-2">&gt; Polski (ojczysty), Angielski (B2)</div>
+                            
+                            <div class="flex"><span class="text-accent mr-2">~</span><span class="animate-pulse">_</span></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Doświadczenie Section -->
+        <section id="doswiadczenie" class="py-24 px-6">
+            <div class="max-w-4xl mx-auto">
+                <h2 class="section-heading">Doświadczenie</h2>
+                
+                <div class="relative border-l border-gray-700 ml-4 md:ml-0 md:pl-8 space-y-12">
+                    
+                    <!-- Pozycja 1: ZOOLEK -->
+                    <div class="relative pl-8 md:pl-0">
+                        <div class="absolute -left-[41px] md:-left-[41px] top-1 w-5 h-5 rounded-full bg-gray-900 border-2 border-accent"></div>
+                        <div class="flex flex-col md:flex-row gap-2 md:gap-4 md:items-baseline mb-2">
+                            <h3 class="text-xl font-bold text-white">Pracownik ds. produkcji i serwisu</h3>
+                            <span class="text-gray-400 text-sm">ZOOLEK Andrzej Mikuła</span>
+                            <span class="font-mono text-xs text-accent bg-accent/10 px-2 py-0.5 rounded md:ml-auto w-max">02.2025 – obecnie</span>
+                        </div>
+                        <p class="text-gray-400 mb-3 text-sm leading-relaxed">
+                            Montaż, kalibracja oraz serwis precyzyjnych urządzeń optoelektronicznych (fotometrów). Diagnostyka usterek sprzętowych, naprawa podzespołów oraz kontrola jakości (QA/QC). Praca z naciskiem na niezawodność i serwisowalność urządzeń.
+                        </p>
+                    </div>
+
+                    <!-- Pozycja 2: ABV Technology -->
+                    <div class="relative pl-8 md:pl-0">
+                        <div class="absolute -left-[41px] md:-left-[41px] top-1 w-5 h-5 rounded-full bg-gray-900 border-2 border-accent"></div>
+                        <div class="flex flex-col md:flex-row gap-2 md:gap-4 md:items-baseline mb-2">
+                            <h3 class="text-xl font-bold text-white">Pracownik zabezpieczenia technicznego</h3>
+                            <span class="text-gray-400 text-sm">ABV Technology Security Systems</span>
+                            <span class="font-mono text-xs text-accent bg-accent/10 px-2 py-0.5 rounded md:ml-auto w-max">08.2024 – 09.2024</span>
+                        </div>
+                        <p class="text-gray-400 mb-3 text-sm leading-relaxed">
+                            Montaż oraz bieżąca eksploatacja instalacji teletechnicznych, okablowania strukturalnego oraz zintegrowanych systemów bezpieczeństwa.
+                        </p>
+                    </div>
+
+                    <!-- Pozycja 3: Politechnika Łódzka - Technik -->
+                    <div class="relative pl-8 md:pl-0">
+                        <div class="absolute -left-[41px] md:-left-[41px] top-1 w-5 h-5 rounded-full bg-gray-900 border-2 border-accent"></div>
+                        <div class="flex flex-col md:flex-row gap-2 md:gap-4 md:items-baseline mb-2">
+                            <h3 class="text-xl font-bold text-white">Technik – Energy Harvesting</h3>
+                            <span class="text-gray-400 text-sm">Politechnika Łódzka</span>
+                            <span class="font-mono text-xs text-accent bg-accent/10 px-2 py-0.5 rounded md:ml-auto w-max">07.2023 – 09.2023</span>
+                        </div>
+                        <p class="text-gray-400 mb-3 text-sm leading-relaxed">
+                            Praktyczne prace badawczo-rozwojowe w laboratorium: badanie metod pozyskiwania energii (energy harvesting), praca techniczna ze sprzętem pomiarowym, akwizycja oraz przetwarzanie danych pomiarowych w zespole projektowym.
+                        </p>
+                    </div>
+
+                    <!-- Pozycja 4: Art-Com -->
+                    <div class="relative pl-8 md:pl-0">
+                        <div class="absolute -left-[41px] md:-left-[41px] top-1 w-5 h-5 rounded-full bg-gray-900 border-2 border-accent"></div>
+                        <div class="flex flex-col md:flex-row gap-2 md:gap-4 md:items-baseline mb-2">
+                            <h3 class="text-xl font-bold text-white">Stażysta – Instalacje Teletechniczne</h3>
+                            <span class="text-gray-400 text-sm">Art-Com sp. z o.o.</span>
+                            <span class="font-mono text-xs text-accent bg-accent/10 px-2 py-0.5 rounded md:ml-auto w-max">03.2021 &amp; 07.2021 – 08.2021</span>
+                        </div>
+                        <p class="text-gray-400 text-sm leading-relaxed">
+                            Montaż i diagnostyka instalacji światłowodowych oraz radiowych, pomiary łączy transmisyjnych oraz bezpośrednia obsługa techniczna klientów.
+                        </p>
+                    </div>
+
+                </div>
+            </div>
+        </section>
+
+        <!-- Edukacja & Szkolenia Section -->
+        <section id="edukacja" class="py-24 px-6 bg-gray-900 border-y border-gray-800">
+            <div class="max-w-5xl mx-auto">
+                <h2 class="section-heading">Edukacja i Kwalifikacje</h2>
+                
+                <div class="grid md:grid-cols-2 gap-8 mt-10">
+                    
+                    <!-- Karta: Wykształcenie -->
+                    <div class="bg-gray-950 p-6 rounded-lg border border-gray-800 flex flex-col justify-between">
+                        <div>
+                            <div class="flex items-center gap-3 mb-4 text-accent">
+                                <i data-feather="book-open" class="w-6 h-6"></i>
+                                <h3 class="text-xl font-bold text-white">Wykształcenie</h3>
+                            </div>
+                            
+                            <div class="space-y-6">
+                                <div class="border-l-2 border-accent pl-4">
+                                    <div class="text-white font-semibold text-lg">Politechnika Łódzka</div>
+                                    <div class="text-accent text-sm font-mono">Elektronika i telekomunikacja (mgr inż)</div>
+                                    <div class="text-gray-500 text-xs font-mono mt-1">2022 – obecnie (5. rok studiów)</div>
+                                    <p class="text-gray-400 text-xs mt-2">
+                                        Badania B+R z kryptografii w systemach wbudowanych. Praca inżynierska z modułów Energy Harvesting dla BLE Mesh.
+                                    </p>
+                                </div>
+
+                                <div class="border-l-2 border-gray-700 pl-4">
+                                    <div class="text-white font-semibold text-lg">Zespół Szkół Elektryczno-Elektronicznych w Radomsku</div>
+                                    <div class="text-accent text-sm font-mono">Technik elektronik</div>
+                                    <div class="text-gray-500 text-xs font-mono mt-1">2018 – 2022</div>
+                                    <p class="text-gray-400 text-xs mt-2">
+                                        Fundamenty teorii obwodów, montaż podzespołów, diagnostyka elektroniczna oraz aparatura laboratoryjna.
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="mt-6 pt-4 border-t border-gray-800/80 flex items-center gap-3 text-xs text-gray-400 font-mono">
+                            <span class="text-accent">&gt;</span> Języki: Angielski (B2) &bull; Polski (ojczysty)
+                        </div>
+                    </div>
+
+                    <!-- Karta: Warsztaty & Szkolenia -->
+                    <div class="bg-gray-950 p-6 rounded-lg border border-gray-800 flex flex-col justify-between">
+                        <div>
+                            <div class="flex items-center gap-3 mb-4 text-accent">
+                                <i data-feather="award" class="w-6 h-6"></i>
+                                <h3 class="text-xl font-bold text-white">Warsztaty i Certyfikaty</h3>
+                            </div>
+
+                            <ul class="space-y-3.5 text-sm text-gray-300">
+                                <li class="flex items-start gap-2.5">
+                                    <i data-feather="check-circle" class="w-4 h-4 text-accent mt-0.5 flex-shrink-0"></i>
+                                    <div>
+                                        <span class="text-white font-medium">Warsztaty z lutowania ręcznego</span>
+                                        <span class="text-xs text-gray-500 font-mono block">05.2024 &bull; Techniki lutowania SMD i THT</span>
+                                    </div>
+                                </li>
+                                <li class="flex items-start gap-2.5">
+                                    <i data-feather="check-circle" class="w-4 h-4 text-accent mt-0.5 flex-shrink-0"></i>
+                                    <div>
+                                        <span class="text-white font-medium">Projektowanie, budowanie i programowanie robotów</span>
+                                        <span class="text-xs text-gray-500 font-mono block">12.2020 &bull; Warsztaty „Odkrywca jest w każdym z nas”</span>
+                                    </div>
+                                </li>
+                                <li class="flex items-start gap-2.5">
+                                    <i data-feather="check-circle" class="w-4 h-4 text-accent mt-0.5 flex-shrink-0"></i>
+                                    <div>
+                                        <span class="text-white font-medium">Certyfikat ECDL</span>
+                                        <span class="text-xs text-gray-500 font-mono block">06.2021 &bull; Umiejętności komputerowe</span>
+                                    </div>
+                                </li>
+                                <li class="flex items-start gap-2.5">
+                                    <i data-feather="check-circle" class="w-4 h-4 text-accent mt-0.5 flex-shrink-0"></i>
+                                    <div>
+                                        <span class="text-white font-medium">TOP SKILLS of 2025</span>
+                                        <span class="text-xs text-gray-500 font-mono block">03.2024 &bull; Kreatywność i rozwiązywanie problemów inżynierskich</span>
+                                    </div>
+                                </li>
+                                <li class="flex items-start gap-2.5">
+                                    <i data-feather="check-circle" class="w-4 h-4 text-accent mt-0.5 flex-shrink-0"></i>
+                                    <div>
+                                        <span class="text-white font-medium">Zarządzanie sobą w czasie &amp; Doradztwo</span>
+                                        <span class="text-xs text-gray-500 font-mono block">04.2024 &bull; Organizacja pracy i priorytetyzacja zadań</span>
+                                    </div>
+                                </li>
+                            </ul>
+                        </div>
+
+                        <div class="mt-6 pt-4 border-t border-gray-800/80 flex items-center gap-3 text-xs text-gray-400 font-mono">
+                            <span class="text-accent">&gt;</span> Uprawnienia: Prawo jazdy kat. B
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </section>
+
+        <!-- Projekty Section -->
+        <section id="projekty" class="py-24 px-6">
+            <div class="max-w-6xl mx-auto">
+                <h2 class="section-heading">Projekty i Realizacje</h2>
+                
+                <div class="grid md:grid-cols-2 gap-6 mt-12">
+                    
+                    <!-- Projekt 1: Inżynierka BLE Mesh Energy Harvesting -->
+                    <div class="project-card bg-gray-950 p-6 rounded-lg border border-gray-800 flex flex-col h-full relative overflow-hidden group">
+                        <div class="absolute top-0 left-0 w-full h-1 bg-accent"></div>
+                        <div class="flex justify-between items-start mb-4">
+                            <i data-feather="sun" class="w-8 h-8 text-accent"></i>
+                            <span class="text-[11px] font-mono text-accent bg-accent/10 px-2 py-0.5 rounded border border-accent/20">Praca Inżynierska</span>
+                        </div>
+                        <h3 class="text-xl font-bold text-white mb-2 group-hover:text-accent transition-colors">Moduł zasilania czujnika BLE Mesh</h3>
+                        <p class="text-gray-400 text-sm mb-6 flex-grow leading-relaxed">
+                            Projekt i wykonanie autonomicznego modułu zasilania czujnika BLE Mesh pozyskującego energię słoneczną. Układ oparty na technologii energy harvestingu z efektywnym zarządzaniem magazynami energii.
+                        </p>
+                        <div class="flex flex-wrap gap-2 mt-auto">
+                            <span class="tech-tag">Energy Harvesting</span>
+                            <span class="tech-tag">BLE Mesh</span>
+                            <span class="tech-tag">Low Power</span>
+                        </div>
+                    </div>
+
+                    <!-- Projekt 2: Prace B+R Kryptografia Embedded -->
+                    <div class="project-card bg-gray-950 p-6 rounded-lg border border-gray-800 flex flex-col h-full relative overflow-hidden group">
+                        <div class="absolute top-0 left-0 w-full h-1 bg-accent"></div>
+                        <div class="flex justify-between items-start mb-4">
+                            <i data-feather="shield" class="w-8 h-8 text-accent"></i>
+                            <span class="text-[11px] font-mono text-accent bg-accent/10 px-2 py-0.5 rounded border border-accent/20">Prace B+R</span>
+                        </div>
+                        <h3 class="text-xl font-bold text-white mb-2 group-hover:text-accent transition-colors">Kryptografia w systemach wbudowanych</h3>
+                        <p class="text-gray-400 text-sm mb-6 flex-grow leading-relaxed">
+                            Badanie porównawcze wydajności obliczeniowej, zużycia pamięci i energochłonności wybranych algorytmów kryptograficznych na mikrokontrolerach. Benchmarking w środowisku bare-metal.
+                        </p>
+                        <div class="flex flex-wrap gap-2 mt-auto">
+                            <span class="tech-tag">Kryptografia</span>
+                            <span class="tech-tag">C (Bare-metal)</span>
+                            <span class="tech-tag">STM32 / Embedded</span>
+                            <span class="tech-tag">Benchmarking</span>
+                        </div>
+                    </div>
+
+                    <!-- Projekt 3: Teletechnika i Pomiary Transmisji -->
+                    <div class="project-card bg-gray-950 p-6 rounded-lg border border-gray-800 flex flex-col h-full relative overflow-hidden group">
+                        <div class="absolute top-0 left-0 w-full h-1 bg-accent"></div>
+                        <div class="flex justify-between items-start mb-4">
+                            <i data-feather="radio" class="w-8 h-8 text-accent"></i>
+                            <span class="text-[11px] font-mono text-gray-400 bg-gray-900 px-2 py-0.5 rounded border border-gray-800">Telekomunikacja</span>
+                        </div>
+                        <h3 class="text-xl font-bold text-white mb-2 group-hover:text-accent transition-colors">Instalacje światłowodowe i radiowe</h3>
+                        <p class="text-gray-400 text-sm mb-6 flex-grow leading-relaxed">
+                            Praktyczne wdrożenia okablowania światłowodowego i torów radiowych, montaż urządzeń telekomunikacyjnych, spawanie włókien oraz diagnostyka tłumienności toru transmisyjnego.
+                        </p>
+                        <div class="flex flex-wrap gap-2 mt-auto">
+                            <span class="tech-tag">Światłowody</span>
+                            <span class="tech-tag">Łącza radiowe</span>
+                            <span class="tech-tag">Diagnostyka łączy</span>
+                        </div>
+                    </div>
+
+                    <!-- Projekt 4: Architektura Sieciowa i Home Lab -->
+                    <div class="project-card bg-gray-950 p-6 rounded-lg border border-gray-800 flex flex-col h-full relative overflow-hidden group">
+                        <div class="absolute top-0 left-0 w-full h-1 bg-accent"></div>
+                        <div class="flex justify-between items-start mb-4">
+                            <i data-feather="server" class="w-8 h-8 text-accent"></i>
+                            <span class="text-[11px] font-mono text-gray-400 bg-gray-900 px-2 py-0.5 rounded border border-gray-800">System IT</span>
+                        </div>
+                        <h3 class="text-xl font-bold text-white mb-2 group-hover:text-accent transition-colors">Architektura sieciowa i Home Lab</h3>
+                        <p class="text-gray-400 text-sm mb-6 flex-grow leading-relaxed">
+                            Budowa własnej infrastruktury serwerowej na użytek deweloperski i prywatny. Zaawansowana konfiguracja routerów MikroTik z regułami firewall i VLAN oraz wdrożenie bezpiecznych tuneli WireGuard dla zdalnego dostępu.
+                        </p>
+                        <div class="flex flex-wrap gap-2 mt-auto">
+                            <span class="tech-tag">MikroTik (RouterOS)</span>
+                            <span class="tech-tag">WireGuard</span>
+                            <span class="tech-tag">VLAN / Firewall</span>
+                            <span class="tech-tag">Linux</span>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </section>
+
+        <!-- Kontakt Section -->
+        <section id="kontakt" class="py-24 px-6 text-center bg-gray-900 border-t border-gray-800">
+            <div class="max-w-3xl mx-auto">
+                <p class="font-mono text-accent mb-4 text-sm">&gt; 05. Kontakt</p>
+                <h2 class="text-4xl font-bold text-white mb-6">Porozmawiajmy o projektach</h2>
+                <p class="text-gray-400 mb-10 text-base md:text-lg leading-relaxed">
+                    Szukasz inżyniera z pasją do elektroniki i systemów wbudowanych? 
+                    Chętnie odpowiem na wszelkie pytania.
+                </p>
+                
+                <div class="flex flex-col sm:flex-row items-center justify-center gap-4 mb-8">
+                    <a href="mailto:h.gnyp@outlook.com" class="inline-flex items-center gap-2 px-6 py-3.5 bg-accent text-gray-950 font-mono font-bold rounded hover:bg-accent-hover transition-colors shadow-lg shadow-accent/20 text-sm">
+                        <i data-feather="mail" class="w-4 h-4"></i>
+                        h.gnyp@outlook.com
+                    </a>
+                    <a href="tel:+48515027084" class="inline-flex items-center gap-2 px-6 py-3.5 border border-gray-700 text-gray-200 font-mono rounded hover:border-accent hover:text-accent transition-colors text-sm">
+                        <i data-feather="phone" class="w-4 h-4"></i>
+                        +48 515 027 084
+                    </a>
+                    <a href="https://www.linkedin.com/in/hubert-gnyp-939983310/" target="_blank" rel="noopener noreferrer" class="inline-flex items-center gap-2 px-5 py-3.5 border border-gray-700 text-gray-300 font-mono rounded hover:border-accent hover:text-accent transition-colors text-sm">
+                        <i data-feather="linkedin" class="w-4 h-4"></i>
+                        LinkedIn
+                    </a>
+                </div>
+
+                <div class="pt-4">
+                    <a href="Hubert_Gnyp_CV.pdf" download="Hubert_Gnyp_CV.pdf" class="inline-flex items-center gap-2 text-xs font-mono text-gray-400 hover:text-accent transition-colors">
+                        <i data-feather="download" class="w-3.5 h-3.5"></i>
+                        Pobierz pełne Curriculum Vitae w formacie PDF
+                    </a>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <!-- Footer -->
+    <footer class="border-t border-gray-800 py-8 text-center bg-gray-950">
+        <div class="flex justify-center gap-6 mb-4">
+            <a href="https://github.com/hugo2080" target="_blank" rel="noopener noreferrer" class="text-gray-500 hover:text-accent transition-colors" title="GitHub: hugo2080">
+                <i data-feather="github"></i>
+            </a>
+            <a href="https://www.linkedin.com/in/hubert-gnyp-939983310/" target="_blank" rel="noopener noreferrer" class="text-gray-500 hover:text-accent transition-colors" title="LinkedIn: Hubert Gnyp">
+                <i data-feather="linkedin"></i>
+            </a>
+            <a href="mailto:h.gnyp@outlook.com" class="text-gray-500 hover:text-accent transition-colors" title="Email: h.gnyp@outlook.com">
+                <i data-feather="mail"></i>
+            </a>
+            <a href="tel:+48515027084" class="text-gray-500 hover:text-accent transition-colors" title="Telefon: +48 515 027 084">
+                <i data-feather="phone"></i>
+            </a>
+        </div>
+        <p class="font-mono text-sm text-gray-600">
+            Zaprojektowane i zbudowane przez <span class="text-gray-400">Hubert Gnyp</span> &copy; 2026 &bull; Politechnika Łódzka
+        </p>
+    </footer>
+
+    <!-- Initialize Feather Icons & Scripts -->
+    <script>
+        feather.replace();
+
+        // Mobile menu toggle
+        const mobileMenuBtn = document.getElementById('mobile-menu-btn');
+        const mobileMenu = document.getElementById('mobile-menu');
+        const mobileLinks = document.querySelectorAll('.mobile-link');
+
+        if (mobileMenuBtn && mobileMenu) {
+            mobileMenuBtn.addEventListener('click', () => {
+                mobileMenu.classList.toggle('hidden');
+            });
+
+            mobileLinks.forEach(link => {
+                link.addEventListener('click', () => {
+                    mobileMenu.classList.add('hidden');
+                });
+            });
+        }
+    </script>
+</body>
+</html>
