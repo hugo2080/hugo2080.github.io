@@ -27,7 +27,6 @@ Personal engineering portfolio website showcasing embedded systems, hardware dev
 - `index.html` – główna strona portfolio (zoptymalizowana pod GitHub Pages)
 - `portfolio.html` – kopia robocza dokumentu portfolio
 - `profile.jpg` – zdjęcie profilowe
-- `Hubert_Gnyp_CV.pdf` – aktualne Curriculum Vitae w formacie PDF
 
 ---
 
